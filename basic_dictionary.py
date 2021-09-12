@@ -11,21 +11,22 @@ while True:
     data = json.loads(data.content)
     try:
         word = data[0]["word"]
-        try:
-            phonetic = data[0]['phonetic']
-        except KeyError:
-            phonetic = '¯\_(ツ)_/¯'
+        phonetic = data[0].get('phonetic', '¯\_(ツ)_/¯')
+        
+
+        origin = data[0]['origin']
         print("==============")
         print(f"""
 word: {word}
 Phonetic: {phonetic}
-
+Origin: {origin}
 Meanings:""")
         for meaning in data[0]['meanings']:
-            print(meaning["partOfSpeech"] + ": ")
+            print('\n' + meaning["partOfSpeech"] + ": ")
             for i, definition in enumerate(meaning["definitions"]):
                 print(f"""
-    {i + 1}) {definition["definition"]}""")
+    {i + 1}) {definition["definition"]}
+       example: {definition.get('example', '-')}""")
         print("==============")
     except KeyError:
         print(f":( couldn't find a definition for {search_term}")
