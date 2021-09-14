@@ -13,12 +13,13 @@ while True:
         word = data[0]["word"]
         phonetic = data[0].get('phonetic', '¯\_(ツ)_/¯')
         
-
+        pronunciation = "https:" + data[0]["phonetics"][0]["audio"]
         origin = data[0]['origin']
         print("==============")
         print(f"""
 word: {word}
 Phonetic: {phonetic}
+Pronunciation: {pronunciation}
 Origin: {origin}
 Meanings:""")
         for meaning in data[0]['meanings']:
